@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Login con Validaciones</title>
+    <script>
+        function validateForm() {
+            let user = document.forms["loginForm"]["user"].value;
+            let password = document.forms["loginForm"]["password"].value;
+            let edad = document.forms["loginForm"]["edad"].value;
+            let errors = [];
+
+            if (user == "" || password == "" || edad == "") {
+                errors.push("Todos los campos son obligatorios.");
+            }
+
+            if (isNaN(edad)) {
+                errors.push("La edad debe ser un número.");
+            } else if (parseInt(edad) < 18) {
+                errors.push("Debes ser mayor de edad (18 años o más).");
+            }
+
+            if (errors.length > 0) {
+                alert(errors.join("\n"));
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</head>
+<body>
+        <form name="loginForm" action="login.php" onsubmit="return validateForm()" method="post">
+            <label for="user" style="font-size: 30px;">Usuario:</label>
+            <input type="text" id="user" name="user"><br><br>
+            <label for="password" style="font-size: 30px;">Contraseña:</label>
+            <input type="password" id="password" name="password"><br><br>
+            <label for="edad" style="font-size: 30px;">Edad:</label>
+            <input type="text" id="edad" name="edad"><br><br>
+            <input type="submit" value="Login" style="font-size: 20px;">
+        </form>
+    
+</body>
+</html>
